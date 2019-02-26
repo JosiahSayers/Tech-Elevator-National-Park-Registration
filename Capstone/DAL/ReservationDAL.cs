@@ -9,7 +9,6 @@ namespace Capstone.DAL
     public class ReservationDAL
     {
         private string connectionString;
-        private const string SQL_GetAllReservations = "SELECT * FROM reservation";
         private const string SQL_CreateReservation = "INSERT INTO reservation (site_id, name, from_date, to_date, create_date) VALUES (@site_id, @name, @from_date, @to_date, @create_date); SELECT CAST(SCOPE_IDENTITY() as int);";
         private const string SQL_ReservationSearch = "SELECT TOP 5 s.site_id, s.site_number, s.max_occupancy, s.accessible, s.max_rv_length, s.utilities FROM site s where s.campground_id = @campground_id AND s.site_id NOT IN (SELECT s.site_id from reservation r JOIN site s on r.site_id = s.site_id WHERE s.campground_id = @campground_id AND r.to_date > @req_from_date AND r.from_date<@req_to_date)";
 

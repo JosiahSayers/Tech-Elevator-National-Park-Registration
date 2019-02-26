@@ -157,7 +157,7 @@ namespace Capstone
                 CampgroundDAL dal = new CampgroundDAL(connectionString);
                 campgrounds = dal.GetCampgrounds(currentPark);
 
-                Console.WriteLine("Campsite Details:\n", Color.LimeGreen);
+                Console.WriteLine("Campground Details:\n", Color.LimeGreen);
                 Console.WriteAscii($"{currentPark.ParkName}", FigletFont.Default, Color.Orange);
                 
                 
@@ -226,10 +226,10 @@ namespace Capstone
 
                 while (emptySearchResults)
                 {
-                    Console.WriteStyled("SELECT arrival date (MM/DD/YYYY): ", styleSheet);
+                    Console.WriteStyled("SELECT Arrival Date (MM/DD/YYYY): ", styleSheet);
                     DateTime arrivalDate = CLIHelper.ParseAsDateTime(Console.ReadLine());
 
-                    Console.WriteStyled("SELECT departure date (MM/DD/YYYY): ", styleSheet);
+                    Console.WriteStyled("SELECT Departure Date (MM/DD/YYYY): ", styleSheet);
                     DateTime departureDate = CLIHelper.ParseAsDateTime(Console.ReadLine(), arrivalDate);
 
                     searchResults = dal.ReservationSearch(campgrounds[userChoice], arrivalDate, departureDate);
@@ -265,11 +265,12 @@ namespace Capstone
         void BookReservation(List<SearchReservation> searchResults)
         {
             ReservationDAL dal = new ReservationDAL(connectionString);
+            styleSheet.AddStyle($"Confirmation ID", (Color.Orange));
             bool reservationCreated = false;
 
             while (!reservationCreated)
             {
-                Console.WriteStyled("\nSELECT campsite: ", styleSheet);
+                Console.WriteStyled("\nSELECT Campsite: ", styleSheet);
                 int siteNumber = CLIHelper.ParseAsInteger(Console.ReadLine());
                 int desiredSiteIndex = CLIHelper.GetChoiceIndexFromSiteNumber(searchResults, siteNumber);
                 Console.Write("What name should the reservation be made under: ");
@@ -290,7 +291,8 @@ namespace Capstone
                 }
                 else
                 {
-                    Console.WriteLine($"The reservation has been made and the confirmation id is {reservationId}");
+                    Console.WriteLine("\nCONGRATULATIONS: Parkcation Reservation Confirmed!", Color.LimeGreen);
+                    Console.WriteLineStyled($"Confirmation ID: #{reservationId}", styleSheet);
                     Console.ReadLine();
                     reservationCreated = true;
                 }

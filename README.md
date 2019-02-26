@@ -1,6 +1,6 @@
 # National Park Registration
  
-* Developed registration application for National Park campsites in C# .NET Core
-* Utilized Microsoft SQL Server as a database
-* Followed Test Driven Development 
+* Built in C# .NET Core
+* Utilizes Microsoft SQL Server as a database
+* Follows Test Driven Development 
 * Performed integration testing
